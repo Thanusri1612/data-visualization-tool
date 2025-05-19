@@ -1,4 +1,8 @@
 # 📊 Data Visualization Tool
+## 🔗 Live Demo
+
+Check out the live demo here: [Click to View](https://Thanusri1612.github.io/data-visualization-tool)
+
 
 This is a React-based data visualization tool created as part of my project. It allows users to visualize data using various chart types like bar charts, line charts, pie charts, and more (depending on how you’ve implemented it).
 
