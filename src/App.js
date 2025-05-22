@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import Plot from "react-plotly.js";
 import Papa from "papaparse";
 import html2canvas from "html2canvas";
+import './App.css';
+import logo from "./assets/logos.svg";
+ // Adjust if using SVG or different path
 
 function App() {
   const [data, setData] = useState([]);
@@ -38,39 +41,53 @@ function App() {
   const yValues = data.map((row) => row[yColumn]);
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Data Visualization Tool</h2>
+    <div className="App">
+      <div className="header">
+        <img src={logo} alt="ScientiFlow Logo" className="logo" />
+        <h1 className="title">ScientiFlow Data Visualization Tool</h1>
+      </div>
 
-      <input type="file" accept=".csv" onChange={handleFileUpload} />
-      <br /><br />
+      <div className="upload-section">
+        <label htmlFor="file-upload" className="custom-file-upload">
+          Choose CSV File
+        </label>
+        <input
+          id="file-upload"
+          type="file"
+          accept=".csv"
+          onChange={handleFileUpload}
+        />
+      </div>
 
       {columns.length > 0 && (
         <>
-          <label>X-axis:</label>
-          <select value={xColumn} onChange={(e) => setXColumn(e.target.value)}>
-            {columns.map((col) => (
-              <option key={col} value={col}>
-                {col}
-              </option>
-            ))}
-          </select>
+          <div className="dropdowns">
+            <label>X-axis:</label>
+            <select value={xColumn} onChange={(e) => setXColumn(e.target.value)}>
+              {columns.map((col) => (
+                <option key={col} value={col}>
+                  {col}
+                </option>
+              ))}
+            </select>
 
-          <label style={{ marginLeft: "10px" }}>Y-axis:</label>
-          <select value={yColumn} onChange={(e) => setYColumn(e.target.value)}>
-            {columns.map((col) => (
-              <option key={col} value={col}>
-                {col}
-              </option>
-            ))}
-          </select>
+            <label>Y-axis:</label>
+            <select value={yColumn} onChange={(e) => setYColumn(e.target.value)}>
+              {columns.map((col) => (
+                <option key={col} value={col}>
+                  {col}
+                </option>
+              ))}
+            </select>
 
-          <label style={{ marginLeft: "10px" }}>Plot Type:</label>
-          <select value={plotType} onChange={(e) => setPlotType(e.target.value)}>
-            <option value="scatter">Scatter Plot</option>
-            <option value="bar">Bar Chart</option>
-          </select>
+            <label>Plot Type:</label>
+            <select value={plotType} onChange={(e) => setPlotType(e.target.value)}>
+              <option value="scatter">Scatter Plot</option>
+              <option value="bar">Bar Chart</option>
+            </select>
+          </div>
 
-          <div id="plot-container" style={{ marginTop: "30px" }}>
+          <div id="plot-container" className="plot-container">
             <Plot
               data={[
                 {
@@ -85,7 +102,9 @@ function App() {
             />
           </div>
 
-          <button onClick={exportPlotAsPNG}>Download Plot as PNG</button>
+          <button className="download-btn" onClick={exportPlotAsPNG}>
+            Download Plot as PNG
+          </button>
         </>
       )}
     </div>
